@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/security
+            http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+            
+    <http auto-config="false" use-expressions="true" disable-url-rewriting="true">
+    
+    	<intercept-url pattern="/admin/*" access="hasAnyRole('ADMIN')" /> <!-- Sử dụng để bắt buộc đăng nhập và role ADMIN mới truy cập được trang admin -->
+    	<intercept-url pattern="/shopingcart" access="hasRole('ADMIN') or hasRole('acc')" /> <!-- Sử dụng để bắt buộc đăng nhập mới có thể sử dụng giỏ hàng -->
+    	<access-denied-handler error-page="/accessDenied" /><!-- Sử dụng để khi có user có role USER đã đang nhập nhưng cố tình truy cập trang admin -->
+        <form-login  login-page="/authen"
+                     username-parameter="j_username"
+                     password-parameter="j_password"
+                     login-processing-url="/j_spring_security_check"
+                     authentication-success-handler-ref="customSuccessHandler"
+                     authentication-failure-url="/authen?incorrectAccount"/>
+        <session-management invalid-session-url="/trang-chu"/><!-- page hiển thị khi logout -->
+        <logout delete-cookies="JSESSIONID"/>
+    </http>
+    
+    <authentication-manager >
+        <authentication-provider user-service-ref="customUserDetailsService">
+         		<password-encoder ref="bcryptEncoder"/>
+        </authentication-provider>
+    </authentication-manager>
+    <beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+    <beans:bean id="customUserDetailsService" class="com.vietshop.Service.impl.CustomUserDetailsService" />
+    <beans:bean id="customSuccessHandler" class="com.vietshop.security.CustomSuccessHandler" />
+    
+</beans:beans>
+
+<!-- <form-login  login-page="/dang-nhap"// Apply theo controller cua login page
+                     username-parameter="j_username"// Nhan tu login form trong login page
+                     password-parameter="j_password"// Nhan tu login form trong login page
+                     login-processing-url="/j_spring_security_check" // Gui thong tin cua user&pass tu file jsp sau khi submit
+                     authentication-success-handler-ref="customSuccessHandler"// Neu login thanh cong se duoc truy cap
+                     authentication-failure-url="/dang-nhap?incorrectAccount"/>// Neu login sai se redirect ve page dang-nhap
+        <session-management invalid-session-url="/dang-nhap?sessionTimeout"/>// Neu login lau se redirect ve page dang-nhap
+        <logout delete-cookies="JSESSIONID"/>
+ -->

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<decorators defaultdir="/decorators">
+
+	
+    <decorator name="web" page="web.jsp">
+       <pattern>/*</pattern>
+    </decorator>
+    
+    <decorator name="admin" page="admin.jsp">
+       <pattern>/admin*</pattern><!-- Tất cả giao diện có chữ admin phía trước sẽ apply giao diện của admin -->
+    </decorator>
+    <decorator name="login" page="login.jsp">
+       <pattern>/authen*</pattern>
+       <pattern>/</pattern>
+       
+    </decorator>
+    
+</decorators>
