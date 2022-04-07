@@ -3,6 +3,7 @@ package com.vietshop.controller.web;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -57,6 +60,8 @@ public class homeController {
 	public ProductService productService;
 	@Autowired
 	private CartItemRepository cartItemRepository;
+	@Autowired
+    public JavaMailSender emailSender;
 
    @RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
    public String homePage(Model model,HttpSession session) {
@@ -91,34 +96,36 @@ public class homeController {
 					// Get sp bán chạy
 				      PageRequest page_req = new PageRequest(0, 8);
 				      Pageable page = page_req;
-				      Page<Product> topProduct = productService.findTopProduct(page);
+				      Page<Product> topProduct = productService.findTopProduct("display",page);
 				      model.addAttribute("topProduct",topProduct);
 				   // Get sp mới nhất			      
-				      Page<Product> lastProduct = productService.findLastProduct(page);
+				      Page<Product> lastProduct = productService.findLastProduct("display",page);
 				      model.addAttribute("lastProduct",lastProduct);
 					return "web/home";
 				}
 				// Get sp bán chạy
 			      PageRequest page_req = new PageRequest(0, 8);
 			      Pageable page = page_req;
-			      Page<Product> topProduct = productService.findTopProduct(page);
+			      Page<Product> topProduct = productService.findTopProduct("display",page);
 			      model.addAttribute("topProduct",topProduct);
 			      
 			   // Get sp mới nhất			      
-			      Page<Product> lastProduct = productService.findLastProduct(page);
+			      Page<Product> lastProduct = productService.findLastProduct("display",page);
 			      model.addAttribute("lastProduct",lastProduct);
       return "web/home";
    }
+   
    
    @GetMapping("/authen/register")
 	public String showFormRegister(Model model) {
 		model.addAttribute("account", new Account());
 		return "register";
 	}
+   
+   
    @PostMapping("/authen/doregister")
    public String doregister(Model model,@ModelAttribute("account") @Valid Account account,BindingResult result) {
 	  
-
 	try {
 		if(result.hasErrors()) {
 			model.addAttribute("account",account);
@@ -147,6 +154,20 @@ public class homeController {
 		   newAcc.setStatus(1);
 		   newAcc.setRole(role);
 		   accountService.save(newAcc);
+		   
+		   MimeMessage message = emailSender.createMimeMessage();
+			boolean multipart = true;
+			
+			MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+			String htmlMsg = "<a>Đăng ký tài khoản vShop thành công</a>"+ "<br>"+
+					"<a href='http://localhost:8080/vietshop/trang-chu'>Go to vShop</a>";   
+	        message.setContent(htmlMsg, "text/html");
+	        helper.setTo(newAcc.getEmail());
+	        
+	        helper.setSubject("Đăng ký tài khoản vShop thành công");
+	        
+
+	        this.emailSender.send(message);
 	} catch(Exception e) {
 		return "Error";
 	}
@@ -157,7 +178,14 @@ public class homeController {
    }
    @RequestMapping(value = "/authen", method = RequestMethod.GET)
    public String loginPage(Model model) {
-      return "login";
+	   //Khac phuc bug vao duoc trang login khi da login
+	  try {
+		  Account account = accountService.findByUserName(SecurityUtils.getPrincipal().getUsername());
+	  }catch ( Exception e) {
+		  return "login";
+	  }
+	  return "redirect:trang-chu";
+	  
    }
    @RequestMapping(value = "/thoat", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {

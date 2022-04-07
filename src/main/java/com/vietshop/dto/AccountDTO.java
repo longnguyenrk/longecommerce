@@ -1,9 +1,13 @@
 package com.vietshop.dto;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Past;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vietshop.Entity.CartItem;
 import com.vietshop.Entity.Order;
@@ -11,12 +15,7 @@ import com.vietshop.Entity.Role;
 
 /*@PasswordMatches*/
 public class AccountDTO {
-	public List<CartItem> getCartItems() {
-		return cartItems;
-	}
-	public void setCartItems(List<CartItem> cartItems) {
-		this.cartItems = cartItems;
-	}
+	
 	private Long id;
 
 	private String userName;
@@ -24,6 +23,9 @@ public class AccountDTO {
 	private String fullName;
 	
 	private String address;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Past(message = "DoB must in the past")
+	private LocalDate dob;
 	
 	private String phone;
 	
@@ -31,7 +33,7 @@ public class AccountDTO {
 	
 	private String newpass;
 	
-	private int role;
+	private Integer idRole;
 	
 	private Integer status;
 	
@@ -88,11 +90,11 @@ public class AccountDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public int getRole() {
-		return role;
+	public Integer getidRole() {
+		return idRole;
 	}
-	public void setRole(int role) {
-		this.role = role;
+	public void setidRole(Integer idRole) {
+		this.idRole = idRole;
 	}
 	public Integer getStatus() {
 		return status;
@@ -130,7 +132,19 @@ public class AccountDTO {
 	public void setNewpass(String newpass) {
 		this.newpass = newpass;
 	}
-	
+	public LocalDate getDob() {
+		return dob;
+	}
+	public void setDob(LocalDate dob) {
+		this.dob = dob;
+	}
+
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
 	
 	
 }

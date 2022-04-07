@@ -1,54 +1,55 @@
 package com.vietshop.dto;
 
 public class OrderDetailsDTO {
-	
-private Long idOrderDetails;
 
-private float price;
+	private Long idOrderdetails;
 
-private int qTy;
+	private Long quantity;
 
-private float subTotal;
+	private double total;
 
-private ProductDTO productDTO;
+	private ProductDTO productDTO;
 
-private OrderDTO orderDTO;
+	private OrderDTO orderDTO;
 
-public Long getIdOrderDetails() {
-	return idOrderDetails;
-}
-public void setIdOrderDetails(Long idOrderDetails) {
-	this.idOrderDetails = idOrderDetails;
-}
-public float getPrice() {
-	return price;
-}
-public void setPrice(float price) {
-	this.price = price;
-}
-public int getqTy() {
-	return qTy;
-}
-public void setqTy(int qTy) {
-	this.qTy = qTy;
-}
-public float getSubTotal() {
-	return subTotal;
-}
-public void setSubTotal(float subTotal) {
-	this.subTotal = subTotal;
-}
-public ProductDTO getProductDTO() {
-	return productDTO;
-}
-public void setProductDTO(ProductDTO productDTO) {
-	this.productDTO = productDTO;
-}
-public OrderDTO getOrderDTO() {
-	return orderDTO;
-}
-public void setOrderDTO(OrderDTO orderDTO) {
-	this.orderDTO = orderDTO;
-}
+	public Long getIdOrderdetails() {
+		return idOrderdetails;
+	}
+
+	public void setIdOrderdetails(Long idOrderdetails) {
+		this.idOrderdetails = idOrderdetails;
+	}
+
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+
+	public ProductDTO getProductDTO() {
+		return productDTO;
+	}
+
+	public void setProductDTO(ProductDTO productDTO) {
+		this.productDTO = productDTO;
+	}
+
+	public OrderDTO getOrderDTO() {
+		return orderDTO;
+	}
+
+	public void setOrderDTO(OrderDTO orderDTO) {
+		this.orderDTO = orderDTO;
+	}
 
 }

@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 public class Role {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idRole;
+	private Integer idRole;
 	
 	@Column(name="name")
 	private String name;

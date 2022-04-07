@@ -29,16 +29,6 @@ public interface iAccountService {
 
 	Account registerNewUserAccount(AccountDTO accountDto) throws UserException;
 
-	void deleteInBatch(Iterable<Account> entities);
-
-	long count();
-
-	void flush();
-
-	boolean exists(Long id);
-
-	List<Account> findAll(Iterable<Long> ids);
-
 	List<Account> findAll(Sort sort);
 
 	Account findOne(Long id);
@@ -55,7 +45,11 @@ public interface iAccountService {
 
 	Account getOne(Long id);
 
-	void delete(Long id);
+	void updateAccount(AccountDTO accountDTO);
+
+	void activeAccount(Long idAccount);
+
+	void deActiveAccount(Long idAccount);
 
 
 

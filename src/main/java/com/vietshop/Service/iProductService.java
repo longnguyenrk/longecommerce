@@ -3,15 +3,14 @@ package com.vietshop.Service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import com.vietshop.Entity.Category;
 import com.vietshop.Entity.Product;
 import com.vietshop.dto.ProductDTO;
-import com.vietshop.repository.ProductRepository;
 
 public interface iProductService {
 
@@ -27,7 +26,7 @@ public interface iProductService {
 
 	<S extends Product> List<S> findAll(long pageIndex, long pageSize);
 
-	Page<Product> findProducts(Pageable pageable);
+	Page<Product> findProducts(String status,Pageable pageable);
 
 	Page<Product> searchProduct(String keyword, Pageable pageable);
 
@@ -69,7 +68,10 @@ public interface iProductService {
 
 	List<Product> findAll(Sort sort);
 
-	Page<Product> findAllByIdCategory(Long idCategory, Pageable pageable);
+	Page<Product> findAllByIdCategory(String status,Long idCategory, Pageable pageable);
+	
+	Page<Product> findAllByIdCategoryAll(Category category, Pageable pageable);
+
 
 	Product findOne(Long id);
 
@@ -78,7 +80,7 @@ public interface iProductService {
 
 	List<Product> findAll();
 
-	Page<Product> listRelatedProduct(Long idCategory, Pageable pageable, Long idProduct);
+	Page<Product> listRelatedProduct(Long idCategory, Pageable pageable, Long idProduct,String status);
 
 	Page<Product> findAll(Pageable pageable);
 

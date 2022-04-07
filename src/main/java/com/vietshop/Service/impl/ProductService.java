@@ -24,8 +24,8 @@ import com.vietshop.repository.ProductRepository;
 
 @Service // Để class có thể thực hiện cơ chế DI và IOC
 public class ProductService implements iProductService {
-	public Page<Product> findLastProduct(Pageable page) {
-		return productRepository.findLastProduct(page);
+	public Page<Product> findLastProduct(String status,Pageable page) {
+		return productRepository.findLastProduct(status,page);
 	}
 
 	@Autowired
@@ -46,8 +46,8 @@ public class ProductService implements iProductService {
 	}
 
 	@Override
-	public Page<Product> listRelatedProduct(Long idCategory, Pageable pageable, Long idProduct) {
-		return productRepository.listRelatedProduct(idCategory, pageable, idProduct);
+	public Page<Product> listRelatedProduct(Long idCategory, Pageable pageable, Long idProduct,String status) {
+		return productRepository.listRelatedProduct(idCategory, pageable, idProduct,status);
 	}
 
 	@Override
@@ -68,8 +68,13 @@ public class ProductService implements iProductService {
 	}
 
 	@Override
-	public Page<Product> findAllByIdCategory(Long idCategory, Pageable pageable) {
-		return productRepository.findAllByIdCategory(idCategory, pageable);
+	public Page<Product> findAllByIdCategory(String status,Long idCategory, Pageable pageable) {
+		return productRepository.findAllByIdCategory(status,idCategory, pageable);
+	}
+	
+	@Override
+	public Page<Product> findAllByIdCategoryAll(Category category, Pageable pageable) {
+		return productRepository.findByCategory(category, pageable);
 	}
 
 	@Override
@@ -178,8 +183,8 @@ public class ProductService implements iProductService {
 	}
 
 	@Override
-	public Page<Product> findProducts(Pageable pageable) {
-		return productRepository.findProducts(pageable);
+	public Page<Product> findProducts(String status,Pageable pageable) {
+		return productRepository.findProducts(status,pageable);
 	}
 
 	@Override
@@ -247,11 +252,22 @@ public class ProductService implements iProductService {
 
 	}
 
-	public Page<Product> findTopProduct(Pageable page) {
-		return productRepository.findTopProduct(page);
+	public Page<Product> findTopProduct(String status,Pageable page) {
+		return productRepository.findTopProduct(status,page);
 	}
 	
-	
+	public ProductDTO getProductDTO(Long idProduct) {
+		Product product = productRepository.getOne(idProduct);
+		ProductDTO productDTO = new ProductDTO();
+		product.setStatus("display");
+		BeanUtils.copyProperties(product, productDTO);
+		return productDTO;
+	}
+	public void changeStatus(ProductDTO productDTO) {
+		Product product = new Product();
+		BeanUtils.copyProperties(productDTO, product);
+		productRepository.save(product);
+	}
 	
 }
 	

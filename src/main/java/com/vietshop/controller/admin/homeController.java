@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +16,7 @@ import com.vietshop.Entity.Product;
 import com.vietshop.Service.impl.AccountService;
 import com.vietshop.Service.impl.OrderService;
 import com.vietshop.Service.impl.ProductService;
+import com.vietshop.dto.OrderDTO;
 
 @Controller(value = "homeControllerOfAdmin")
 public class homeController {
@@ -34,7 +32,6 @@ public class homeController {
    @RequestMapping(value = "/admin/trang-chu", method = RequestMethod.GET)
    public String homePage(Model model) {
       List<Order> listOrder = orderService.findAll();
-      
       List<Product> listProduct = productService.findAll();
       
       List<Account> listAccount = accountService.findAllCustomer();
@@ -50,11 +47,8 @@ public class homeController {
 		model.addAttribute("formatter",formatter);
       
       // Get order mới nhất
-      PageRequest page_req = new PageRequest(0, 5);// Get page hiện tại là 0 và số Orders là 5
-      Pageable page = page_req;
-      Page<Order> pageOrder = orderService.findRecentOrder(page);
-      
-      model.addAttribute("pageOrders",pageOrder);
+      Page<OrderDTO> orderPage = orderService.getLastOrder();
+      model.addAttribute("pageOrders",orderPage);
       return "admin/home";
    }
    

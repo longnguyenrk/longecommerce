@@ -75,8 +75,8 @@
 											href="addProductHome?idProduct= ${item.idProduct}&quantity=1" ><i
 												class="fa fa-shopping-car"></i></a></li>
 									</c:if>
-									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
-								</ul>
+<!-- 									<li><a href="#"><i class="fa fa-retweet"></i></a></li>
+ -->								</ul>
 							</div>
 							<div class="featured__item__text">
 								<h6>
@@ -135,7 +135,7 @@
 								<ul class="featured__item__pic__hover">
 									<c:if test="${item.quantity > 0}">
 										<li><a 
-											href="addProduct?idProduct= ${item.idProduct}&quantity=1" ><i
+											href="addProductHome?idProduct= ${item.idProduct}&quantity=1" ><i
 												class="fa fa-shopping-car"></i></a></li>
 									</c:if>
 								</ul>

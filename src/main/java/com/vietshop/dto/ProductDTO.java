@@ -8,8 +8,25 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.vietshop.Entity.CartItem;
+import com.vietshop.Entity.Category;
 
 public class ProductDTO {
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Transient
 	private static final long serialVersionUID = -1975995400692617094L;
 	private Long idProduct;
@@ -22,9 +39,12 @@ public class ProductDTO {
 	private String imgUrl;
 	private String unit;
 	private Long quantity;
+	private Long soldQuantity;
 	private Long idCategory;
-	private Long id;
+	private Category category;
 	private Long weight;
+	private String status;
+
 	private List<ProductDTO> listResult = new ArrayList<>();
 	private List<CartItem> cartItems;
 
@@ -109,13 +129,7 @@ public class ProductDTO {
 		this.idProduct = idProduct;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 
 
 	public static long getSerialversionuid() {
@@ -136,6 +150,14 @@ public class ProductDTO {
 
 	public void setWeight(Long weight) {
 		this.weight = weight;
+	}
+
+	public Long getSoldQuantity() {
+		return soldQuantity;
+	}
+
+	public void setSoldQuantity(Long soldQuantity) {
+		this.soldQuantity = soldQuantity;
 	}
 	
 	

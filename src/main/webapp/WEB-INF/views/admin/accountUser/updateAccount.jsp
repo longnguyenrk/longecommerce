@@ -57,6 +57,9 @@
 											required="required" style="height: 30px;"
 											placeholder="Nhập tên sản phẩm..." name="userName"
 											value="${account.userName}" />
+											<input type="hidden" class="form-control"
+											name="status" 
+											value="${account.status}" />
 											</td>
 									</tr>
 									<tr>

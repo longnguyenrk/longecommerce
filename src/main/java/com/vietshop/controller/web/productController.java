@@ -69,7 +69,7 @@ public class productController {
 
 		} else {
 
-			productPage = productService.findProducts(pageable);
+			productPage = productService.findProducts("display",pageable);
 		}
 		model.addAttribute("product", productPage);
 		long size = productPage.getTotalElements();
@@ -108,13 +108,13 @@ public class productController {
 			// Get sp mới nhất list 1
 			PageRequest page_req1 = new PageRequest(0, 3);
 			Pageable page1 = page_req1;
-			Page<Product> lastProduct1 = productService.findLastProduct(page1);
+			Page<Product> lastProduct1 = productService.findLastProduct("display",page1);
 			model.addAttribute("lastProduct1", lastProduct1);
 			
 			// Get sp mới nhất list 2
 			PageRequest page_req2 = new PageRequest(1, 3);
 			Pageable page2 = page_req2;
-			Page<Product> lastProduct2 = productService.findLastProduct(page2);
+			Page<Product> lastProduct2 = productService.findLastProduct("display",page2);
 			model.addAttribute("lastProduct2", lastProduct2);
 			return "web/shopGrid";
 		}
@@ -122,13 +122,13 @@ public class productController {
 		// Get sp mới nhất list 1
 		PageRequest page_req1 = new PageRequest(0, 3);
 		Pageable page1 = page_req1;
-		Page<Product> lastProduct1 = productService.findLastProduct(page1);
+		Page<Product> lastProduct1 = productService.findLastProduct("display",page1);
 		model.addAttribute("lastProduct1", lastProduct1);
 		
 		// Get sp mới nhất list 2
 		PageRequest page_req2 = new PageRequest(1, 3);
 		Pageable page2 = page_req2;
-		Page<Product> lastProduct2 = productService.findLastProduct(page2);
+		Page<Product> lastProduct2 = productService.findLastProduct("display",page2);
 		model.addAttribute("lastProduct2", lastProduct2);
 
 		return "web/shopGrid";
@@ -153,7 +153,7 @@ public class productController {
 			PageRequest page_req = new PageRequest(currentPage, 12, Sort.Direction.DESC, sort.orElse("idProduct"));
 			pageable = page_req;
 		}
-		Page<Product> productPage = productService.findAllByIdCategory(idCategory, pageable);
+		Page<Product> productPage = productService.findAllByIdCategory("display",idCategory, pageable);
 		long size = productPage.getTotalElements();
 		System.out.println(size);
 		model.addAttribute("size", size);
@@ -192,9 +192,30 @@ public class productController {
 		} catch (Exception e) {
 			model.addAttribute("quantity", 0); // KHi chưa đăng nhập thì giỏ hàng = 0
 			model.addAttribute("priceTotal", 0);
+			// Get sp mới nhất list 1
+			PageRequest page_req1 = new PageRequest(0, 3);
+			Pageable page1 = page_req1;
+			Page<Product> lastProduct1 = productService.findLastProduct("display",page1);
+			model.addAttribute("lastProduct1", lastProduct1);
+			
+			// Get sp mới nhất list 2
+			PageRequest page_req2 = new PageRequest(1, 3);
+			Pageable page2 = page_req2;
+			Page<Product> lastProduct2 = productService.findLastProduct("display",page2);
+			model.addAttribute("lastProduct2", lastProduct2);
 			return "web/shopGridByCategory";
 		}
-
+		// Get sp mới nhất list 1
+		PageRequest page_req1 = new PageRequest(0, 3);
+		Pageable page1 = page_req1;
+		Page<Product> lastProduct1 = productService.findLastProduct("display",page1);
+		model.addAttribute("lastProduct1", lastProduct1);
+		
+		// Get sp mới nhất list 2
+		PageRequest page_req2 = new PageRequest(1, 3);
+		Pageable page2 = page_req2;
+		Page<Product> lastProduct2 = productService.findLastProduct("display",page2);
+		model.addAttribute("lastProduct2", lastProduct2);
 		return "web/shopGridByCategory";
 	}
 
@@ -208,12 +229,11 @@ public class productController {
 		model.addAttribute("product", product);
 		model.addAttribute("idProduct", idProduct);
 		model.addAttribute("price", price);
-
-		System.out.println(product.getProduct());
-		int currentPage = 0;
-		Pageable pageable = null;
+		
+		PageRequest page_req = new PageRequest(0, 9);
+		Pageable pageable = page_req;
 		// List sản phẩm tương tự
-		Page<Product> productPage = productService.listRelatedProduct(idCategory, pageable, idProduct);
+		Page<Product> productPage = productService.listRelatedProduct(idCategory, pageable, idProduct,"display");
 		System.out.println(productPage);
 		int size = productPage.getNumberOfElements();
 		model.addAttribute("size", size);

@@ -1,18 +1,9 @@
-package com.vietshop.Entity;
+package com.vietshop.dto;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
 
-
-@Entity
-public class CreditCard {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class CreditCardDTO {
 	private Long id;
 	
 	private String name;
@@ -26,11 +17,8 @@ public class CreditCard {
 	private int cvcCode;
 	
 	private double balance;
-	
-	private String status;
-	
-	@OneToMany(mappedBy = "creditCard")
-	private List<Payment> paymentList;
+		
+	private List<PaymentDTO> paymentDTOList;
 
 	public Long getId() {
 		return id;
@@ -88,20 +76,14 @@ public class CreditCard {
 		this.balance = balance;
 	}
 
-	public String getStatus() {
-		return status;
+
+
+	public List<PaymentDTO> getPaymenpaymentDTOListtList() {
+		return paymentDTOList;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public List<Payment> getPaymentList() {
-		return paymentList;
-	}
-
-	public void setPaymentList(List<Payment> paymentList) {
-		this.paymentList = paymentList;
+	public void setPaymentpaymentDTOListList(List<PaymentDTO> paymentDTOList) {
+		this.paymentDTOList = paymentDTOList;
 	}
 	
 	

@@ -8,9 +8,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -155,13 +153,12 @@ public class orderController {
 			boolean multipart = true;
 			
 			MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-			String htmlMsg = "<a>Cám ơn quý khách đã đặt hàng !</a>"+ 
-					"<a href='http://localhost:8080/vietshop/thankOrder?idOrder="+order.getIdOrder()+"'>Xem chi tiết tại đây</a>";
-	        
+			String htmlMsg = "<a>Thank you for your order !</a>"+ 
+					"<a href='http://localhost:8080/vietshop/thankOrder?idOrder="+order.getIdOrder()+"'>Details</a>";   
 	        message.setContent(htmlMsg, "text/html");
-	        helper.setTo("fviet295@gmail.com");
+	        helper.setTo(account.getEmail());
 	        
-	        helper.setSubject("Đặt hàng thành công, Mã đơn hàng: "+"000"+order.getIdOrder());
+	        helper.setSubject("Order Success: "+"000"+order.getIdOrder());
 	        
 
 	        this.emailSender.send(message);
@@ -267,13 +264,13 @@ public class orderController {
 					boolean multipart = true;
 					
 					MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-					String htmlMsg = "<a>Cám ơn quý khách đã đặt hàng !</a>"+ 
-							"<a href='http://localhost:8080/vietshop/thankOrder?idOrder="+order.getIdOrder()+"'>Xem chi tiết tại đây</a>";
+					String htmlMsg = "<a>Thank you for your order !</a>"+ 
+							"<a href='http://localhost:8080/vietshop/thankOrder?idOrder="+order.getIdOrder()+"'>Details</a>";   
 			        
 			        message.setContent(htmlMsg, "text/html");
-			        helper.setTo("fviet295@gmail.com");
+			        helper.setTo(account.getEmail());
 			        
-			        helper.setSubject("Đặt hàng thành công, Mã đơn hàng: "+"000"+order.getIdOrder());
+			        helper.setSubject("Order Success: "+"000"+order.getIdOrder());
 			        
 
 			        this.emailSender.send(message);
@@ -321,4 +318,6 @@ public class orderController {
 		model.addAttribute("dateOrder", orderService.findOne(idOrder).getDateOrder());
 		return "web/thankOrder";
 	}
+	
+	
 }

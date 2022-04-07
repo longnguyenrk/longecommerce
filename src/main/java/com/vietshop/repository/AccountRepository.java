@@ -15,8 +15,11 @@ import com.vietshop.Entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account,Long>{
 	Account findOneByUserNameAndStatus(String name,int status);
+	
 	Account findByEmail(String email);
+	
 	Account findByUserName(String userName);
+	
 	@Query("SELECT u FROM Account u WHERE u.userName LIKE %:keyword%")
 	Page<Account> findByUserName(@Param("keyword")String keyword,Pageable pageable);
 	

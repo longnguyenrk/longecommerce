@@ -47,7 +47,7 @@
 														</tr>
 													</thead>
 													<tbody>
-														<c:forEach items="${category.content}" varStatus="loop"
+														<c:forEach items="${categoryPage.content}" varStatus="loop"
 															var="item">
 															<tr>
 

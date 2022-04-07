@@ -2,11 +2,9 @@ package com.vietshop.controller.admin;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -63,8 +61,6 @@ public class productController {
 			return "admin/product/createNewProduct";
 		}
 		
-		productDto.getCost();
-		System.out.println(productDto.getCost());
 		productService.addProduct(productDto);
 
 		return "redirect:/admin/list-product";
@@ -97,7 +93,7 @@ public class productController {
 
 		} else {
 
-			productPage = productService.findProducts(pageable);
+			productPage = productService.findAll(pageable);
 		}
 		long size = productPage.getTotalElements();
 		System.out.println(size);
@@ -135,7 +131,7 @@ public class productController {
 			PageRequest page_req = new PageRequest(currentPage, 10, Sort.Direction.DESC, sort.orElse("idProduct"));
 			pageable = page_req;
 		}
-		Page<Product> productPage = productService.findAllByIdCategory(idCategory, pageable);
+		Page<Product> productPage = productService.findAllByIdCategoryAll(categoryService.findOne(idCategory), pageable);
 		model.addAttribute("products", productPage);
 		long size = productPage.getTotalElements();
 		Category cate = categoryService.findOne(idCategory);
@@ -185,14 +181,13 @@ public class productController {
 		Product product = productService.getOne(productDto.getIdProduct()); // Get ra entity có id theo DTO nhận từ view
 
 		productDto.setQuantity(product.getQuantity() + addQuantity);// Theem so luong sp
-
-		System.out.println(product.getProduct() + " OLD"); // truyền vào
+		productDto.setStatus(product.getStatus());
+		productDto.setSoldQuantity(product.getSoldQuantity());
 
 		Category category = categoryService.getOne(productDto.getIdCategory());
 		product.setCategory(category);
-		System.out.println(productDto.getProduct() + " DTO");
-		String saveImgUrl = "/Users/macbook/eclipse-workspace/vietshop/src/main/webapp/resources/images";
-//		String saveImgUrl = "D:/Java/workspace/vietshop/src/main/webapp/resources/images";
+//		String saveImgUrl = "/Users/macbook/eclipse-workspace/vietshop/src/main/webapp/resources/images";
+		String saveImgUrl = "D:/Java/workspace/vietshop/src/main/webapp/resources/images";
 
 		try {
 			MultipartFile multipartFile = productDto.getImageFile();
@@ -216,6 +211,41 @@ public class productController {
 		model.addAttribute("product", product);
 
 		return "redirect:/admin/list-product";
+	}
+	
+	@GetMapping("admin/doHideProduct")
+	public String doHideProduct(Model model,@RequestParam("idProduct")Long idProduct,@RequestParam("p") Optional<Integer> p) {
+		ProductDTO productDTO = productService.getProductDTO(idProduct);
+		productDTO.setStatus("hide");
+		productService.changeStatus(productDTO);
+		int page = p.orElse(0);
+		return "redirect:/admin/list-product?p="+page;
+	}
+	
+	@GetMapping("admin/doDisplayProduct")
+	public String doDisplayProduct(Model model,@RequestParam("idProduct")Long idProduct,@RequestParam("p") Optional<Integer> p) {
+		ProductDTO productDTO = productService.getProductDTO(idProduct);
+		productDTO.setStatus("display");
+		productService.changeStatus(productDTO);
+		int page = p.orElse(0);
+		return "redirect:/admin/list-product?p="+page;
+	}
+	@GetMapping("admin/doHideProductByCate")
+	public String doHideProductByCate(Model model,@RequestParam("idProduct")Long idProduct,@RequestParam("p") Optional<Integer> p,@RequestParam("idCategory") Long idCategory) {
+		ProductDTO productDTO = productService.getProductDTO(idProduct);
+		productDTO.setStatus("hide");
+		productService.changeStatus(productDTO);
+		int page = p.orElse(0);
+		return "redirect:/admin/list-product-by-category?idCategory="+idCategory+"&"+"p="+page;
+	}
+	
+	@GetMapping("admin/doDisplayProductByCate")
+	public String doDisplayProductByCate(Model model,@RequestParam("idProduct")Long idProduct,@RequestParam("p") Optional<Integer> p,@RequestParam("idCategory") Long idCategory) {
+		ProductDTO productDTO = productService.getProductDTO(idProduct);
+		productDTO.setStatus("display");
+		productService.changeStatus(productDTO);
+		int page = p.orElse(0);
+		return "redirect:/admin/list-product-by-category?idCategory="+idCategory+"&"+"p="+page;
 	}
 
 }

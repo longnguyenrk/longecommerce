@@ -18,6 +18,13 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name="Product")
 public class Product {
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Id
 	@Column(name="idProduct")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +51,8 @@ public class Product {
 	private Long quantity;
 	
 	private Long soldQuantity;
+	
+	private String status;
 	
 	@JoinColumn(name="idCategory")
 	@ManyToOne

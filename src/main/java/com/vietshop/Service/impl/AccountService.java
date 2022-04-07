@@ -4,19 +4,33 @@ import java.util.List;
 import java.util.Optional;
 
 import org.omg.CORBA.UserException;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.vietshop.Entity.Account;
-import com.vietshop.Entity.Product;
+import com.vietshop.Entity.Role;
 import com.vietshop.Service.iAccountService;
 import com.vietshop.dto.AccountDTO;
 import com.vietshop.repository.AccountRepository;
+import com.vietshop.repository.RoleRepository;
 @Service // Để class có thể thực hiện cơ chế DI và IOC
 public class AccountService implements iAccountService{
+	
+	@Autowired
+	public PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	public RoleService roleService;
+	
+	@Autowired
+	
+	public RoleRepository roleRepository;
+	
 	public List<Account> findAllCustomer() {
 		return accountRepository.findAllCustomer();
 	}
@@ -43,31 +57,6 @@ public class AccountService implements iAccountService{
 		return accountRepository.findAll(sort);
 	}
 
-	@Override
-	public List<Account> findAll(Iterable<Long> ids) {
-		return accountRepository.findAll(ids);
-	}
-
-	@Override
-	public boolean exists(Long id) {
-		return accountRepository.exists(id);
-	}
-
-	@Override
-	public void flush() {
-		accountRepository.flush();
-	}
-
-
-	@Override
-	public long count() {
-		return accountRepository.count();
-	}
-
-	@Override
-	public void deleteInBatch(Iterable<Account> entities) {
-		accountRepository.deleteInBatch(entities);
-	}
 
 	@Override
 	public Account registerNewUserAccount(AccountDTO accountDto) throws UserException {
@@ -122,9 +111,38 @@ public class AccountService implements iAccountService{
 	}
 
 	@Override
-	public void delete(Long id) {
-		accountRepository.delete(id);
+	public void updateAccount(AccountDTO accountDTO) {
+		Account account = accountRepository.findOne(accountDTO.getId());
+		BeanUtils.copyProperties(accountDTO, account);
+		accountRepository.save(account);
+	}
+	@Override
+	public void activeAccount(Long idAccount ) {
+		Account account = accountRepository.findOne(idAccount);
+		account.setStatus(1);
+		accountRepository.save(account);
+	}
+	@Override
+	public void deActiveAccount(Long idAccount ) {
+		Account account = accountRepository.findOne(idAccount);
+		account.setStatus(0);
+		accountRepository.save(account);
 	}
 	
+	public void register(AccountDTO accountDTO) {
+		Role role = new Role();
+		role = roleRepository.getOne(accountDTO.getidRole());
+		Account newAcc = new Account();
+		newAcc.setUserName(accountDTO.getUserName());
+		newAcc.setPassword(passwordEncoder.encode(accountDTO.getNewpass()));
+		newAcc.setDob(accountDTO.getDob());
+		newAcc.setAddress(accountDTO.getAddress());
+		newAcc.setFullName(accountDTO.getFullName());
+		newAcc.setPhone(accountDTO.getPhone());
+		newAcc.setEmail(accountDTO.getEmail());
+		newAcc.setStatus(1);
+		newAcc.setRole(role);
+		accountRepository.save(newAcc);
+	}
 	
 }

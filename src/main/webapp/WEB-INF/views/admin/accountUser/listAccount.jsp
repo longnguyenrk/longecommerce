@@ -13,14 +13,8 @@
 
 </head>
 <body>
-
-	<!-- WRAPPER -->
-
-
-
-		<!-- MAIN -->
-		<!-- MAIN CONTENT -->
-
+	<div class="row">
+		<div class="col-lg-12 col-md-12">
 		<form action="list-account" method="get" modelAttribute="account">
 			<div class="main">
 				<div class="main-content">
@@ -94,8 +88,8 @@
 																<th>Loại tài khoản</th>
 																<th>Trạng thái hoạt động</th>
 																<th>Cập nhật</th>
-																<th>Xóa </th>
-															</tr>
+<!-- 																<th>Xóa </th>
+ -->															</tr>
 														</thead>
 <%-- 														</c:if>
  --%>														<tbody>
@@ -131,12 +125,12 @@
 																		href="<c:url value = '/admin/updateAccount?id=${item.id}'/>">
 																			<span class="label label-warning"
 																			style="font-size: 15px;">Cập nhật</span>
-																	</td>
+																	<%-- </td>
 																																		<td style="vertical-align: middle;"><a
 																		href="<c:url value='/admin/deleteAccount?id=${item.id}'/>">
 																			<span class="label label-warning"
 																			style="font-size: 15px;">Xóa</span>
-																	</a></td>
+																	</a></td> --%>
 																</tr>
 															</c:forEach>
 														</tbody>
@@ -191,14 +185,73 @@
 							</div>
 							<div id="headline-chart" class="ct-chart"></div>
 							</form>
+			</div>
+					
+<div class="col-lg-4 col-md-4">
+					<h4 class="panel-title">TẠO TÀI KHOẢN MỚI</h4>
+					<br>
+		
+					<form action="doregisteramdin" modelAttribute="account"
+					method="post">
+					<div class="form-group">
+						<div class="form-label-group">
+					<select class="form-select" name="idRole">
+						<option value=1>Quản trị viên</option>
+						<option value=2>Khách hàng</option>
+					</select>
+					</div>
+					</div>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="fullName" id="fullName" name="fullName"
+								class="form-control" placeholder="Họ và tên" required="required">
 						</div>
 					</div>
-				</div>
-			</div>
+					<div class="form-group">
+						<div class="form-label-group">
+
+							<input type="date" id="dob" name="dob" class="form-control">
+						</div>
+					</div>
+					<p style="color: red;">${messageEmail}</p>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="email" id="email" name="email" class="form-control"
+								placeholder="Email liên hệ" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="phone" id="phone" name="phone" class="form-control"
+								placeholder="Số điện thoại liên hệ" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="form-label-group">
+							<input type="text" id="address" name="address"
+								class="form-control" placeholder="Địa chỉ giao hàng"
+								required="required">
+						</div>
+					</div>
+					<p style="color: red;">${messageUser}</p>
+
+					<div class="form-group">
+						<input type="text" class="form-control" id="userName"
+							name="userName" placeholder="Tên đăng nhập mới">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" id="newpass"
+							name="newpass" placeholder="Mật khẩu mới">
+					</div>
+
+					<button type="submit" class="btn btn-primary">Tạo tài khoản</button>
+				</form>
+	</div>			
 	</div>
-	</form>
+	
 	<!-- END MAIN -->
 	<div class="clearfix"></div>
+	
 <!-- 	<footer>
 		<div class="container-fluid">
 			<p class="copyright">
@@ -206,8 +259,9 @@
 					I Need</a>. All Rights Reserved.
 			</p>
 		</div>
-	</footer -->>
+	</footer -->
 	</div>
+	
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
 	<script>

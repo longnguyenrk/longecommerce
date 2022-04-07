@@ -1,17 +1,24 @@
 package com.vietshop.Service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.hibernate.SessionFactory;
 
 import com.vietshop.Entity.Order;
+import com.vietshop.Entity.OrderDetails;
 import com.vietshop.Service.iOrderService;
+import com.vietshop.dto.OrderDTO;
+import com.vietshop.dto.OrderDetailsDTO;
 import com.vietshop.repository.OrderRepository;
 
 @Service // Để class có thể thực hiện cơ chế DI và IOC
@@ -34,25 +41,12 @@ public class OrderService implements iOrderService{
 		return orderRepository.findAll(pageable);
 	}
 
-	@Override
-	public List<Order> findAll() {
-		return orderRepository.findAll();
-	}
 
 	@Override
 	public Order findOne(Long id) {
 		return orderRepository.findOne(id);
 	}
 
-	@Override
-	public List<Order> findAll(Sort sort) {
-		return orderRepository.findAll(sort);
-	}
-
-	@Override
-	public List<Order> findAll(Iterable<Long> ids) {
-		return orderRepository.findAll(ids);
-	}
 
 	@Override
 	public boolean exists(Long id) {
@@ -119,9 +113,10 @@ public class OrderService implements iOrderService{
 		orderRepository.delete(entities);
 	}
 
-	@Override
-	public <S extends Order> List<S> findAll(Example<S> example) {
-		return orderRepository.findAll(example);
+	
+
+	public List<Order> findAll() {
+		return orderRepository.findAll();
 	}
 
 	@Override
@@ -134,10 +129,6 @@ public class OrderService implements iOrderService{
 		return orderRepository.exists(example);
 	}
 
-	@Override
-	public <S extends Order> List<S> findAll(Example<S> example, Sort sort) {
-		return orderRepository.findAll(example, sort);
-	}
 
 	@Override
 	public Order getOrderByUserName(String username) {
@@ -155,7 +146,18 @@ public class OrderService implements iOrderService{
 	public Page<Order> findRecentOrderByUsername(Pageable page, String username) {
 		return orderRepository.findRecentOrderByUsername(page, username);
 	}
+	public Page<OrderDTO> getLastOrder(){
+	PageRequest page_req = new PageRequest(0, 5);
+    Pageable page = page_req;
+    
+    Page<OrderDTO> orderyDTOpage = orderRepository.findRecentOrder(page).map(Order -> {
+    	OrderDTO orderDTO = new OrderDTO();
+		BeanUtils.copyProperties(Order, orderDTO);
+		return orderDTO;
+	});
+    return orderyDTOpage;
+	}
 	
 	
-
+		
 }

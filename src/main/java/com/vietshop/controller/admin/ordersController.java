@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.vietshop.Entity.Order;
 import com.vietshop.Entity.OrderDetails;
-import com.vietshop.Entity.Product;
-import com.vietshop.Service.impl.OrderDetailsService;
 import com.vietshop.Service.impl.OrderService;
-import com.vietshop.paging.Pageble;
 
 @Controller
 public class ordersController {
@@ -27,12 +24,11 @@ public class ordersController {
 	@Autowired
 	private OrderService orderService;
 	
-	@Autowired
-	private OrderDetailsService orderDetailService;
+	
 	@GetMapping("admin/listOrder")
 	public String listOrder(Model model,@RequestParam("p") Optional<Integer> p,
 			@RequestParam(name = "sort", defaultValue = "idOrder") Optional<String> sort,
-			@RequestParam(name = "updown", defaultValue = "ASC") String updown,
+			@RequestParam(name = "updown", defaultValue = "DESC") String updown,
 			@RequestParam("keyword") Optional<String> keyword ) {
 		int currentPage = p.orElse(0);
 		Pageable pageable = null;
@@ -55,12 +51,10 @@ public class ordersController {
 			orderPage = orderService.findAll(pageable);
 		}
 		long size = orderPage.getTotalElements();
-		System.out.println(size);
 		model.addAttribute("size", size);
 		model.addAttribute("orders", orderPage);
 		model.addAttribute("sorter", sort.get());
 		model.addAttribute("updown", updown);
-		System.out.println(sort.get());
 		model.addAttribute("p", currentPage);
 		
 		DecimalFormat formatter = new DecimalFormat("###,###,###.##");

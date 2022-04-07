@@ -72,6 +72,9 @@
 																<li><a
 															href="<c:url value='/admin/list-product?p=0&sort=soldQuantity'/>">
 																Bán chạy</a></li>
+																<li><a
+															href="<c:url value='/admin/list-product?p=0&sort=status'/>">
+																Tình trạng hiển thị</a></li>
 													</ul>
 												</div>
 												<div class="dropdown"
@@ -135,7 +138,8 @@
 																<th>Khối lượng chuẩn</th>
 																<th style="width: 10%;">Hình ảnh</th>
 																<th style="width: 22%;">Mô tả</th>
-																<th style="width: 22%;">Cập nhật</th>
+																<th style="width: 10%;">Cập nhật</th>
+																<th>Ẩn sản phầm</th>
 															</tr>
 														</thead>
 													</c:if>
@@ -161,11 +165,21 @@
 																		<span class="label label-warning"
 																		style="font-size: 15px;">Cập nhật</span>
 																</a>
+																<c:if test="${item.status eq  'display'}">
 																<td style="vertical-align: middle;"><a
-																	href="<c:url value='/admin/deleteProduct?idProduct=${item.idProduct}'/>">
-																		<span class="label label-warning"
-																		style="font-size: 15px;">Xóa</span>
-																</a></td>
+																	href="<c:url value='/admin/doHideProduct?idProduct=${item.idProduct}&p=${p }'/>">
+																		<span class="label label-info" style="font-size: 15px;">Hiển thị</span>
+																</a>
+																</td>
+																</c:if>
+																
+																<c:if test="${item.status eq  'hide'}">
+																<td style="vertical-align: middle;"><a
+																	href="<c:url value='/admin/doDisplayProduct?idProduct=${item.idProduct}&p=${p }'/>">
+																		<span class="label label-default" style="font-size: 15px;">Ẩn</span>
+																</a>
+																</td>
+																</c:if>
 															</tr>
 														</c:forEach>
 													</tbody>

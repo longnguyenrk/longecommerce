@@ -3,7 +3,6 @@ package com.vietshop.dto;
 import java.util.List;
 
 import javax.persistence.Transient;
-import javax.validation.constraints.NotBlank;
 
 import org.springframework.web.multipart.MultipartFile;
 

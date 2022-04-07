@@ -5,61 +5,79 @@ import java.util.List;
 
 import com.vietshop.Entity.Account;
 import com.vietshop.Entity.OrderDetails;
+import com.vietshop.Entity.ShippingInfo;
 
 public class OrderDTO {
-	private Long idOrder;
+private Long idOrder;
+	
+
 	private Date dateOrder;
+	
 	private String status;
-	private double priceTotal;
+
+	private double subTotal;
+
 	private Account account;
+	
 	private List<OrderDetails> OrderDetailsList;
+	
+	private ShippingInfo shippingInfo;
 
-public Long getIdOrder() {
-	return idOrder;
-}
+	public Long getIdOrder() {
+		return idOrder;
+	}
 
-public Date getDateOrder() {
-	return dateOrder;
-}
-public void setDateOrder(Date dateOrder) {
-	this.dateOrder = dateOrder;
-}
+	public void setIdOrder(Long idOrder) {
+		this.idOrder = idOrder;
+	}
 
-public String getStatus() {
-	return status;
-}
+	public Date getDateOrder() {
+		return dateOrder;
+	}
 
-public void setStatus(String status) {
-	this.status = status;
-}
+	public void setDateOrder(Date dateOrder) {
+		this.dateOrder = dateOrder;
+	}
 
-public double getPriceTotal() {
-	return priceTotal;
-}
+	public String getStatus() {
+		return status;
+	}
 
-public void setPriceTotal(double priceTotal) {
-	this.priceTotal = priceTotal;
-}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-public Account getAccount() {
-	return account;
-}
+	public double getSubTotal() {
+		return subTotal;
+	}
 
-public void setAccount(Account account) {
-	this.account = account;
-}
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
+	}
 
-public List<OrderDetails> getOrderDetailsList() {
-	return OrderDetailsList;
-}
+	public Account getAccount() {
+		return account;
+	}
 
-public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
-	OrderDetailsList = orderDetailsList;
-}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
 
-public void setIdOrder(Long idOrder) {
-	this.idOrder = idOrder;
-}
+	public List<OrderDetails> getOrderDetailsList() {
+		return OrderDetailsList;
+	}
 
+	public void setOrderDetailsList(List<OrderDetails> orderDetailsList) {
+		OrderDetailsList = orderDetailsList;
+	}
 
+	public ShippingInfo getShippingInfo() {
+		return shippingInfo;
+	}
+
+	public void setShippingInfo(ShippingInfo shippingInfo) {
+		this.shippingInfo = shippingInfo;
+	}
+	
+	
 }
