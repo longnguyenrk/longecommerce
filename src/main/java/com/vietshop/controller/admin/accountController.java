@@ -1,5 +1,7 @@
 package com.vietshop.controller.admin;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.mail.internet.MimeMessage;
@@ -80,8 +82,22 @@ public class accountController {
 
 
 	   @PostMapping("/admin/doregisteramdin")
-	public String doregisteramdin(Model model, @ModelAttribute("account") AccountDTO accountDTO) {
+	public String doregisteramdin(Model model, @ModelAttribute("account") @Valid AccountDTO accountDTO,BindingResult bindingResult) {
+		   
+		   if (bindingResult.hasErrors()) {
+			   Map<String, String> errors= new HashMap<>();
 
+	            bindingResult.getFieldErrors().forEach(
+	                    error -> errors.put(error.getField(), error.getDefaultMessage())
+	            );
+
+	            String errorMsg= "";
+
+	            for(String key: errors.keySet()){
+	                errorMsg+= "Lỗi ở: " + key + ", lí do: " + errors.get(key) + "\n";
+	            }
+	            return errorMsg;
+	    } 
 		try {
 			
 			// Check user đã tồn tại
@@ -115,10 +131,12 @@ public class accountController {
 		return "redirect:/admin/list-account";
 	}
 
+
+
 	@GetMapping("admin/updateAccount")
 	public String updateAccount(Model model, @RequestParam("id") Long id) {
-		Optional<Account> account = accountService.findByIdAccount(id);
-		model.addAttribute("account", account.get());
+		AccountDTO accountDTO = accountService.findByIdAccountDTO(id);
+		model.addAttribute("account", accountDTO);
 		return "/admin/accountUser/updateAccount";
 	}
 

@@ -1,9 +1,6 @@
 package com.vietshop.Service.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,14 +8,11 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.vietshop.Entity.Order;
-import com.vietshop.Entity.OrderDetails;
 import com.vietshop.Service.iOrderService;
 import com.vietshop.dto.OrderDTO;
-import com.vietshop.dto.OrderDetailsDTO;
 import com.vietshop.repository.OrderRepository;
 
 @Service // Để class có thể thực hiện cơ chế DI và IOC

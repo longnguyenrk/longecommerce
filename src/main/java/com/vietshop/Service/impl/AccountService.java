@@ -96,6 +96,17 @@ public class AccountService implements iAccountService{
 	public Optional<Account> findByIdAccount(Long id) {
 		return accountRepository.findByIdAccount(id);
 	}
+	
+	
+	public AccountDTO findByIdAccountDTO(Long id) {
+		Account account = accountRepository.findOne(id);
+		
+		AccountDTO accountDTO = new AccountDTO();
+
+		BeanUtils.copyProperties(account, accountDTO);
+		
+		return accountDTO;
+	}
 
 	@Override
 	public void deleteByIdAccount(Long id) {

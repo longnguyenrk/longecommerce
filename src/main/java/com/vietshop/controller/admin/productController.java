@@ -93,7 +93,7 @@ public class productController {
 
 		} else {
 
-			productPage = productService.findAll(pageable);
+			productPage = productService.findAllProduct(pageable);
 		}
 		long size = productPage.getTotalElements();
 		System.out.println(size);

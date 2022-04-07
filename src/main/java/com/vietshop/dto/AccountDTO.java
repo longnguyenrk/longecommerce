@@ -5,8 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.vietshop.Entity.CartItem;
@@ -17,20 +21,28 @@ import com.vietshop.Entity.Role;
 public class AccountDTO {
 	
 	private Long id;
-
+	
+	@NotBlank(message = "username không được trống")
 	private String userName;
 	
+	@NotBlank(message = "fullname không được trống")
+	@Pattern(regexp = "[a-zA-Z][a-zA-Z ]+")
 	private String fullName;
 	
+	@NotBlank(message = "address không được trống")
 	private String address;
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Past(message = "DoB must in the past")
 	private LocalDate dob;
 	
+	@NotBlank(message = "phone không được trống")
 	private String phone;
 	
+	@Length(min = 6,message = "Password phải từ 6 kí tự trở lên")
 	private String oldpass;
 	
+	@Length(min = 6,message = "Password phải từ 6 kí tự trở lên")
 	private String newpass;
 	
 	private Integer idRole;

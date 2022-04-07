@@ -82,7 +82,7 @@ public interface iProductService {
 
 	Page<Product> listRelatedProduct(Long idCategory, Pageable pageable, Long idProduct,String status);
 
-	Page<Product> findAll(Pageable pageable);
+	Page<Product> findAllProduct(Pageable pageable);
 
 	<S extends Product> S findOne(Example<S> example);
 

@@ -23,6 +23,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 	Page<Product> findProducts(@Param("status") String status,Pageable pageable);
 	
 	@Query("SELECT e FROM Product e")
+	Page<Product> findAllProduct(Pageable pageable);
+	
+	@Query("SELECT e FROM Product e")
 	List<Product> findAll(Sort sort);
 	
 	@Query("SELECT u FROM Product u WHERE u.idProduct = :idProduct")
