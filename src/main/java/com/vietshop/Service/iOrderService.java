@@ -6,7 +6,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.vietshop.Entity.Order;
+import com.vietshop.entity.Order;
 
 public interface iOrderService {
 

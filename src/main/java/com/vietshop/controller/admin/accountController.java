@@ -23,9 +23,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Service.impl.AccountService;
+import com.vietshop.Service.imp.AccountService;
 import com.vietshop.dto.AccountDTO;
+import com.vietshop.entity.Account;
 
 @Controller
 public class accountController {

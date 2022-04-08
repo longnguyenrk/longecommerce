@@ -10,13 +10,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Entity.Order;
-import com.vietshop.Entity.Product;
-import com.vietshop.Service.impl.AccountService;
-import com.vietshop.Service.impl.OrderService;
-import com.vietshop.Service.impl.ProductService;
+import com.vietshop.Service.imp.AccountService;
+import com.vietshop.Service.imp.OrderService;
+import com.vietshop.Service.imp.ProductService;
 import com.vietshop.dto.OrderDTO;
+import com.vietshop.entity.Account;
+import com.vietshop.entity.Order;
+import com.vietshop.entity.Product;
 
 @Controller(value = "homeControllerOfAdmin")
 public class homeController {

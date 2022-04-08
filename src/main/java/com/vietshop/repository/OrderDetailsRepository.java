@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.vietshop.Entity.OrderDetails;
+import com.vietshop.entity.OrderDetails;
 
 public interface OrderDetailsRepository extends JpaRepository<OrderDetails,Long>{
 	@Query("SELECT p FROM OrderDetails p WHERE p.product.idProduct = :idProduct")

@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vietshop.Entity.Account;
+import com.vietshop.entity.Account;
 
 public interface AccountRepository extends JpaRepository<Account,Long>{
 	Account findOneByUserNameAndStatus(String name,int status);

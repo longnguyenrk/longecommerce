@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.vietshop.Entity.Category;
+import com.vietshop.entity.Category;
 
 public interface iCategoryService {
 

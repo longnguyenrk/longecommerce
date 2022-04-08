@@ -3,9 +3,9 @@ package com.vietshop.dto;
 import java.util.Date;
 import java.util.List;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Entity.OrderDetails;
-import com.vietshop.Entity.ShippingInfo;
+import com.vietshop.entity.Account;
+import com.vietshop.entity.OrderDetails;
+import com.vietshop.entity.ShippingInfo;
 
 public class OrderDTO {
 private Long idOrder;

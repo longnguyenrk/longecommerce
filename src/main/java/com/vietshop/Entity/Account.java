@@ -1,4 +1,4 @@
-package com.vietshop.Entity;
+package com.vietshop.entity;
 
 import java.time.LocalDate;
 import java.util.List;

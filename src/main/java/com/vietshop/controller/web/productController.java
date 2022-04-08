@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Entity.CartItem;
-import com.vietshop.Entity.Category;
-import com.vietshop.Entity.Product;
-import com.vietshop.Service.iProductService;
-import com.vietshop.Service.impl.AccountService;
-import com.vietshop.Service.impl.CategoryService;
-import com.vietshop.Service.impl.ProductService;
+import com.vietshop.Service.imp.AccountService;
+import com.vietshop.Service.imp.CategoryService;
+import com.vietshop.Service.imp.ProductService;
+import com.vietshop.entity.Account;
+import com.vietshop.entity.CartItem;
+import com.vietshop.entity.Category;
+import com.vietshop.entity.Product;
 import com.vietshop.repository.CartItemRepository;
+import com.vietshop.Service.iProductService;
 import com.vietshop.util.SecurityUtils;
 
 @Controller(value = "productControllerOfWeb")

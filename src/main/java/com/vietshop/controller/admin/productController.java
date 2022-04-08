@@ -24,11 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.vietshop.Entity.Category;
-import com.vietshop.Entity.Product;
-import com.vietshop.Service.impl.CategoryService;
-import com.vietshop.Service.impl.ProductService;
+import com.vietshop.Service.imp.CategoryService;
+import com.vietshop.Service.imp.ProductService;
 import com.vietshop.dto.ProductDTO;
+import com.vietshop.entity.Category;
+import com.vietshop.entity.Product;
 import com.vietshop.repository.CategoryRepository;
 import com.vietshop.repository.ProductRepository;
 

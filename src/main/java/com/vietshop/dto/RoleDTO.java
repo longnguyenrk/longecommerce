@@ -3,7 +3,7 @@ package com.vietshop.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.vietshop.Entity.Account;
+import com.vietshop.entity.Account;
 
 public class RoleDTO extends AbstractDTO<RoleDTO>{
 	private String name;

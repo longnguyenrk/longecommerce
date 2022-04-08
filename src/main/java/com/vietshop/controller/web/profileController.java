@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +16,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Entity.Order;
-import com.vietshop.Entity.OrderDetails;
 import com.vietshop.Service.iAccountService;
-import com.vietshop.Service.impl.CategoryService;
-import com.vietshop.Service.impl.OrderService;
-import com.vietshop.Service.impl.ShoppingCartService;
+import com.vietshop.Service.imp.OrderService;
+import com.vietshop.Service.imp.ShoppingCartService;
 import com.vietshop.dto.AccountDTO;
+import com.vietshop.entity.Account;
+import com.vietshop.entity.Order;
+import com.vietshop.entity.OrderDetails;
 import com.vietshop.repository.CartItemRepository;
 import com.vietshop.repository.ProductRepository;
 import com.vietshop.util.SecurityUtils;
@@ -32,8 +30,7 @@ import com.vietshop.util.SecurityUtils;
 @Controller
 public class profileController {
 
-	@Autowired
-	private CategoryService categoryService;
+	
 	@Autowired
 	public PasswordEncoder passwordEncoder;
 	@Autowired

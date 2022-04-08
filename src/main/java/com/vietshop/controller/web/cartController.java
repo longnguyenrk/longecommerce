@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Entity.CartItem;
-import com.vietshop.Entity.Category;
-import com.vietshop.Entity.Product;
-import com.vietshop.Service.iAccountService;
-import com.vietshop.Service.impl.CategoryService;
-import com.vietshop.Service.impl.ShoppingCartService;
+import com.vietshop.Service.imp.CategoryService;
+import com.vietshop.Service.imp.ShoppingCartService;
+import com.vietshop.entity.Account;
+import com.vietshop.entity.CartItem;
+import com.vietshop.entity.Category;
+import com.vietshop.entity.Product;
 import com.vietshop.repository.CartItemRepository;
 import com.vietshop.repository.ProductRepository;
+import com.vietshop.Service.iAccountService;
 import com.vietshop.util.SecurityUtils;
 
 @Controller

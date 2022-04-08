@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vietshop.Entity.Category;
-import com.vietshop.Service.impl.CategoryService;
+import com.vietshop.Service.imp.CategoryService;
 import com.vietshop.dto.CategoryDTO;
+import com.vietshop.entity.Category;
 
 @Controller(value = "categoryControllerOfAdmin")
 public class categoryController {

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.vietshop.Entity.News;
+import com.vietshop.entity.News;
 
 public interface iNewsService {
 

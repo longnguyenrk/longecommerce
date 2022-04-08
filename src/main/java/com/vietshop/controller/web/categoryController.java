@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.vietshop.Entity.Category;
-import com.vietshop.Service.impl.CategoryService;
+import com.vietshop.Service.imp.CategoryService;
+import com.vietshop.entity.Category;
 
 @Controller("categoryControllerOfClient")
 //@RequestMapping("/client")

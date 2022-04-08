@@ -9,9 +9,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vietshop.Entity.Account;
-import com.vietshop.Entity.CartItem;
-import com.vietshop.Entity.Product;
+import com.vietshop.entity.Account;
+import com.vietshop.entity.CartItem;
+import com.vietshop.entity.Product;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem,Long> {
 	public List<CartItem> findByAccount(Account account);

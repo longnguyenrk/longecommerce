@@ -7,9 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.vietshop.Entity.CartItem;
-import com.vietshop.Entity.Order;
-import com.vietshop.Entity.OrderDetails;
+import com.vietshop.entity.CartItem;
+import com.vietshop.entity.Order;
+import com.vietshop.entity.OrderDetails;
 
 public interface iOrderDetailsService {
 

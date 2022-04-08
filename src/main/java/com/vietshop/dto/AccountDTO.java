@@ -13,9 +13,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.vietshop.Entity.CartItem;
-import com.vietshop.Entity.Order;
-import com.vietshop.Entity.Role;
+import com.vietshop.entity.CartItem;
+import com.vietshop.entity.Order;
+import com.vietshop.entity.Role;
 
 /*@PasswordMatches*/
 public class AccountDTO {

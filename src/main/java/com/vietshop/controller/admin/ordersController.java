@@ -14,9 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.vietshop.Entity.Order;
-import com.vietshop.Entity.OrderDetails;
-import com.vietshop.Service.impl.OrderService;
+import com.vietshop.Service.imp.OrderService;
+import com.vietshop.entity.Order;
+import com.vietshop.entity.OrderDetails;
 
 @Controller
 public class ordersController {

@@ -2,7 +2,7 @@ package com.vietshop.Service;
 
 import java.util.List;
 
-import com.vietshop.Entity.CartItem;
+import com.vietshop.entity.CartItem;
 
 public interface iCartItemService {
 

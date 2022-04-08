@@ -13,9 +13,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.vietshop.Entity.Category;
-import com.vietshop.Entity.Order;
-import com.vietshop.Entity.Product;
+import com.vietshop.entity.Category;
+import com.vietshop.entity.Order;
+import com.vietshop.entity.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {

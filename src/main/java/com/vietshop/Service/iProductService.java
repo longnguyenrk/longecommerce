@@ -8,9 +8,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
-import com.vietshop.Entity.Category;
-import com.vietshop.Entity.Product;
 import com.vietshop.dto.ProductDTO;
+import com.vietshop.entity.Category;
+import com.vietshop.entity.Product;
 
 public interface iProductService {
 

@@ -1,4 +1,4 @@
-package com.vietshop.Entity;
+package com.vietshop.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
